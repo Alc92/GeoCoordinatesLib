@@ -37,37 +37,6 @@ public class GeoCoordinatesLibTest {
 		System.out.println(CoordinatesCalculations.isInCircleArea(c1, c2, 100)); //false
 		System.out.println(CoordinatesCalculations.isInCircleArea(c2, c1, 100)); //false
 
-		long start = 0;
-		long stop = 0;
-		double [] duration = new double[10000];
-
-		for(int i=0; i<10000; i++){
-			start = System.nanoTime();
-			Coordinates random1 = CoordinatesCalculations.getRandomLocation(c1, 2000);
-			Coordinates random2 = CoordinatesCalculations.getRandomLocation(c1, 2000);
-			CoordinatesCalculations.isInSquareArea(random1, c1, 500);
-			CoordinatesCalculations.isInCircleArea(random1, c1, 500);
-			CoordinatesCalculations.isInSquareArea(random1, c2, 500);
-			CoordinatesCalculations.isInCircleArea(random1, c2, 500);
-			CoordinatesCalculations.isInSquareArea(random2, c1, 500);
-			CoordinatesCalculations.isInCircleArea(random2, c1, 500);
-			CoordinatesCalculations.isInSquareArea(random2, c2, 500);
-			CoordinatesCalculations.isInCircleArea(random2, c2, 500);
-			stop = System.nanoTime();
-			duration[i] = (stop-start)/1000000d;
-		}
-		//System.out.println(duration/100000);
-
-		BufferedWriter br = new BufferedWriter(new FileWriter("myfile.txt"));
-		StringBuilder sb = new StringBuilder();
-		for (int i=0; i<duration.length; i++) {
-			sb.append((i+1)+": "+duration[i]);
-			sb.append("\n");
-		}
-
-		br.write(sb.toString());
-		br.close();
-
 	}
 
 }
