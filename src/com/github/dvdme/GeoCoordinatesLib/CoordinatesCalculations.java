@@ -2,12 +2,30 @@ package com.github.dvdme.GeoCoordinatesLib;
 
 import java.util.Random;
 
+/**
+ * A utility class with static method to perform usefull
+ * calculations with geographical coordinates
+ * 
+ * @author David
+ * @version 1.0 
+ */
+
 public class CoordinatesCalculations {
 	
 	private CoordinatesCalculations () {
 		//Empty private constructor to prevent instantiation
 	}
-
+	
+	/**
+	 * Calculates if target is inside a square area where
+	 * center is the center of the square and radius is half
+	 * the side of the square.
+	 * 
+	 * @param coordinate Target coordinate
+	 * @param center Center coordinate
+	 * @param radius Radius meters
+	 * @return True or False
+	 */
 	public static boolean isInSquareArea(Coordinates coordinate,Coordinates center, int radius){
 
 		boolean latres = false;
@@ -29,6 +47,15 @@ public class CoordinatesCalculations {
 		return (latres && lonres);
 	}
 
+	/**
+	 * Calculates if target is inside a circle area where
+	 * center is the center of the circle
+	 * 
+	 * @param coordinate Target coordinate
+	 * @param center Center coordinate
+	 * @param radius Radius meters
+	 * @return True or False
+	 */
 	public static boolean isInCircleArea(Coordinates coordinate,Coordinates center, int radius){
 
 		boolean res = isInSquareArea(coordinate, center, radius);
@@ -46,16 +73,13 @@ public class CoordinatesCalculations {
 	 * and bearing (degrees). This methods uses simple geometry equations to
 	 * calculate the end-point.
 	 * 
-	 * @param point
-	 *            Point of origin
-	 * @param range
-	 *            Range in meters
-	 * @param bearing
-	 *            Bearing in degrees
+	 * @see <a href="stackoverflow.com">http://stackoverflow.com/questions/3695224/sqlite-getting-nearest-locations-with-latitude-and-longitude</a>
+	 * @param coordinate Point of origin
+	 * @param range Range in meters
+	 * @param bearing Bearing in degrees
 	 * @return End-point from the source given the desired range and bearing.
 	 */
 	public static Coordinates getDerivedPosition(Coordinates coordinate,double range, double bearing) {
-		// http://stackoverflow.com/questions/3695224/sqlite-getting-nearest-locations-with-latitude-and-longitude
 
 		double EarthRadius = 6371000; // meters
 
@@ -77,9 +101,15 @@ public class CoordinatesCalculations {
 
 	}
 
-
+	/**
+	 * Calculates the distance in meters between two points.
+	 * 
+	 * @see <a href="stackoverflow.com">http://stackoverflow.com/questions/3695224/sqlite-getting-nearest-locations-with-latitude-and-longitude</a>
+	 * @param c1 Coordinate one
+	 * @param c2 Coordinate two
+	 * @return The distance in meters
+	 */
 	public static double getDistanceBetweenTwoPoints(Coordinates c1, Coordinates c2) {
-		// http://stackoverflow.com/questions/3695224/sqlite-getting-nearest-locations-with-latitude-and-longitude
 		
 		double R = 6371000; // m
 		double dLat = Math.toRadians(c2.getLatitude() - c1.getLatitude());
@@ -94,16 +124,31 @@ public class CoordinatesCalculations {
 		return d;
 	}
 	
+	/**
+	 * Gets a random location given a center point and a radius.
+	 * 
+	 * @see <a href="gis.stackexchange.com">http://gis.stackexchange.com/questions/25877/how-to-generate-random-locations-nearby-my-location</a>
+	 * @param centerLatitude Center Latitude
+	 * @param centerLongitude Center Longitude
+	 * @param radius Radius
+	 * @return Coordinates object
+	 */
 	public static Coordinates getRandomLocation(double centerLatitude, double centerLongitude, int radius) {
-		//http://gis.stackexchange.com/questions/25877/how-to-generate-random-locations-nearby-my-location
 		
 		Coordinates coor = new Coordinates(centerLatitude, centerLongitude);
 		
 		return getRandomLocation(coor, radius);
 	}
 	
+	/**
+	 * Gets a random location given a center point and a radius.
+	 * 
+	 * @see <a href="gis.stackexchange.com">http://gis.stackexchange.com/questions/25877/how-to-generate-random-locations-nearby-my-location</a>
+	 * @param center Center
+	 * @param radius Radius
+	 * @return Coordinates object
+	 */
 	public static Coordinates getRandomLocation(Coordinates center, int radius) {
-		//http://gis.stackexchange.com/questions/25877/how-to-generate-random-locations-nearby-my-location
 		
 		Random random = new Random();
 

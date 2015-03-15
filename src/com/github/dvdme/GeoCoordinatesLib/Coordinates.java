@@ -7,24 +7,24 @@ import java.util.regex.Pattern;
 /**
  * Geographical Coordinates Object
  * 
- * <p>Parses three formats of geographical coordinates</p>
- * <p>Format can be like one the following:</p>
- * <p>degrees minutes seconds: 40º 26' 46'' N 79º 58' 56'' W</p>
- * <p>degrees decimal minutes: 40º 26.767' N 79º 58.933' W</p>
- * <p>decimal degrees: 40.446º N 79.982º W</p>
+ * Parses geographical coordinates in one of four formats:
+ *  - degrees minutes seconds: 40º 26' 46'' N, 79º 58' 56'' W
+ *  - degrees decimal minutes: 40º 26.767' N, 79º 58.933' W
+ *  - decimal degrees: 40.446º N, 79.982º W
+ *  - decimal: 40.446, 79.982
  * 
  * @author David
- *@version 1.0
+ * @version 1.0
  */
 
 public class Coordinates {
 
 	private double latitude;
 	private double longitude;
-
+	
 	/**
 	 * Constructor
-	 * Initializes latitude and longitude with 0.
+	 * Initializes with 0 latitude and longitude  
 	 */
 	public Coordinates(){
 		setLatitude(0);
@@ -32,11 +32,9 @@ public class Coordinates {
 	}
 
 	/**
-	 * Constructor
-	 * Initializes latitude and longitude in one of the supported formats.
-	 * 
-	 * @param String with latitude 
-	 * @param String with longitude
+	 * Initializes with given latitude and longitude
+	 * @param latitude Latitude
+	 * @param longitude Longitude
 	 */
 	public Coordinates(String latitude, String longitude){
 		setLatitude(parseCoordinate(latitude));
@@ -44,19 +42,17 @@ public class Coordinates {
 	}
 
 	/**
-	 * Constructor
-	 * Initializes latitude and longitude in decimal degrees.
-	 * 
-	 * @param Double with latitude 
-	 * @param Double with longitude
+	 * Initializes with given latitude and longitude
+	 * @param latitude Latitude
+	 * @param longitude Longitude
 	 */
 	public Coordinates(double latitude, double longitude){
 		setLatitude(latitude);
 		setLongitude(longitude);
 	}
-	
+
 	/**
-	 * Gets the latitude
+	 * Gets latitude
 	 * @return latitude
 	 */
 	public double getLatitude() {
@@ -64,7 +60,7 @@ public class Coordinates {
 	}
 	
 	/**
-	 * Gets the latitude as string
+	 * Gets latitude as a string
 	 * @return latitude as string
 	 */
 	public String getLatitudeAsString() {
@@ -72,37 +68,53 @@ public class Coordinates {
 	}
 
 	/**
-	 * Sets the latitude
-	 * @param latitude
+	 * Sets latitude
+	 * @param latitude Latitude
 	 */
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	
+
 	/**
-	 * Sets the latitude
-	 * @param latitude
+	 * Parses latitude
+	 * @param latitude Latitude
 	 */
 	public void setLatitude(String latitude) {
 		setLatitude( parseCoordinate(latitude) );
 	}
 
+	/**
+	 * Gets longitude
+	 * @return longitude Longitude
+	 */
 	public double getLongitude() {
 		return longitude;
 	}
-
+	
+	/**
+	 * Gets longitude as string
+	 * @return longitude as string
+	 */
 	public String getLongitudeAsString() {
 		return String.valueOf(longitude);
 	}
 
+	/**
+	 * Sets longitude
+	 * @param longitude Longitude
+	 */
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
+	/**
+	 * Parses longitude
+	 * @param longitude Longitude
+	 */
 	public void setLongitude(String longitude) {
 		setLongitude( parseCoordinate(longitude) );
 	}
-
+	
 	@Override
 	public String toString(){
 		return String.valueOf(latitude) + "," + String.valueOf(longitude);
@@ -119,26 +131,26 @@ public class Coordinates {
 		}
 
 		if(c2.length == 3){
-
+			
 			double degrees = Double.parseDouble(c2[0]);
 			double minutes = Double.parseDouble(c2[1]);
 			double seconds = Double.parseDouble(c2[2]);
 			retval = degrees + minutes / 60 + seconds / 3600;
-
+			
 		} else if(c2.length == 2) {
-
+			
 			double degrees = Double.parseDouble(c2[0]);
 			double minutes = Double.parseDouble(c2[1]);
 			retval = degrees + minutes / 60;
-
+			
 		} else if(c2.length == 1) {
-
+			
 			retval = Double.parseDouble(c2[0]);
-
+			
 		} else {
-
+			
 			throw new IllegalArgumentException();
-
+			
 		}
 
 		return isNegative(c) ? retval * -1 : retval;
@@ -171,7 +183,5 @@ public class Coordinates {
 
 		return retval;
 	}
-
+	
 }
-
-
