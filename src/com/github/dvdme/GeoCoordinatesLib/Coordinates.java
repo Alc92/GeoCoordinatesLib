@@ -37,7 +37,7 @@ public class Coordinates {
 	}
 
 	public void setLatitude(String latitude) {
-		setLatitude( Double.parseDouble(latitude) );
+		setLatitude( parseCoordinate(latitude) );
 	}
 
 	public double getLongitude() {
@@ -53,7 +53,7 @@ public class Coordinates {
 	}
 
 	public void setLongitude(String longitude) {
-		setLongitude( Double.parseDouble(longitude) );
+		setLongitude( parseCoordinate(longitude) );
 	}
 	
 	@Override
