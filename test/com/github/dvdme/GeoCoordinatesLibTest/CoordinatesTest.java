@@ -20,17 +20,37 @@ public class CoordinatesTest {
 		assertEquals("", 79.982, c.getLongitude(), 0.001);
 	}
 	
-	@Test
-	public void testSetLatitude() {
+	@Test(expected=IllegalArgumentException.class)
+	public void testCoordinatesIllegalArgument() {
 		Coordinates c = new Coordinates();
-		c.setLatitude("40º 26' 46''  S ");
-		assertEquals("", -40.446, c.getLatitude(), 0.001);
+		c.setLatitude("60º 40º 26' 46''  S ");
+		c.setLongitude(" 79º 58' 56'' 12''' E");
 	}
 	
 	@Test
-	public void testSetLongitude() {
+	public void testCoordinatesDegreesMinutesSeconds() {
 		Coordinates c = new Coordinates();
+		c.setLatitude("40º 26' 46''  S ");
 		c.setLongitude(" 79º 58' 56'' E");
+		assertEquals("", -40.446, c.getLatitude(), 0.001);
+		assertEquals("", -79.982, c.getLongitude(), 0.001);
+	}
+	
+	@Test
+	public void testCoordinatesDegreesDecimalMinutes() {
+		Coordinates c = new Coordinates();
+		c.setLatitude("40º 26.767'  N ");
+		c.setLongitude(" 79º 58.933 W");
+		assertEquals("", 40.446, c.getLatitude(), 0.001);
+		assertEquals("", 79.982, c.getLongitude(), 0.001);
+	}
+	
+	@Test
+	public void testCoordinatesDecimalDegrees() {
+		Coordinates c = new Coordinates();
+		c.setLatitude("40.446º S ");
+		c.setLongitude(" 79.982º E");
+		assertEquals("", -40.446, c.getLatitude(), 0.001);
 		assertEquals("", -79.982, c.getLongitude(), 0.001);
 	}
 
