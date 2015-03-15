@@ -4,54 +4,113 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Geographical Coordinates Object
+ * 
+ * Parses geographical coordinates in one of four formats:
+ *  - degrees minutes seconds: 40º 26' 46'' N, 79º 58' 56'' W
+ *  - degrees decimal minutes: 40º 26.767' N, 79º 58.933' W
+ *  - decimal degrees: 40.446º N, 79.982º W
+ *  - decimal: 40.446, 79.982
+ * 
+ * @author David
+ * @version 1.0
+ */
+
 public class Coordinates {
 
 	private double latitude;
 	private double longitude;
-
+	
+	/**
+	 * Constructor
+	 * Initializes with 0 latitude and longitude  
+	 */
 	public Coordinates(){
 		setLatitude(0);
 		setLongitude(0);
 	}
 
+	/**
+	 * Initializes with given latitude and longitude
+	 * @param latitude Latitude
+	 * @param longitude Longitude
+	 */
 	public Coordinates(String latitude, String longitude){
 		setLatitude(parseCoordinate(latitude));
 		setLongitude(parseCoordinate(longitude));
 	}
 
+	/**
+	 * Initializes with given latitude and longitude
+	 * @param latitude Latitude
+	 * @param longitude Longitude
+	 */
 	public Coordinates(double latitude, double longitude){
 		setLatitude(latitude);
 		setLongitude(longitude);
 	}
 
+	/**
+	 * Gets latitude
+	 * @return latitude
+	 */
 	public double getLatitude() {
 		return latitude;
 	}
 	
+	/**
+	 * Gets latitude as a string
+	 * @return latitude as string
+	 */
 	public String getLatitudeAsString() {
 		return String.valueOf(latitude);
 	}
 
+	/**
+	 * Sets latitude
+	 * @param latitude Latitude
+	 */
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
+	/**
+	 * Parses latitude
+	 * @param latitude Latitude
+	 */
 	public void setLatitude(String latitude) {
 		setLatitude( parseCoordinate(latitude) );
 	}
 
+	/**
+	 * Gets longitude
+	 * @return longitude Longitude
+	 */
 	public double getLongitude() {
 		return longitude;
 	}
 	
+	/**
+	 * Gets longitude as string
+	 * @return longitude as string
+	 */
 	public String getLongitudeAsString() {
 		return String.valueOf(longitude);
 	}
 
+	/**
+	 * Sets longitude
+	 * @param longitude Longitude
+	 */
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
+	/**
+	 * Parses longitude
+	 * @param longitude Longitude
+	 */
 	public void setLongitude(String longitude) {
 		setLongitude( parseCoordinate(longitude) );
 	}
