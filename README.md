@@ -3,9 +3,9 @@ GeoCoordinatesLib
 A Java library to deal with geographical coordinates.
 It can parse one of the four formats:
 
-* degrees minutes seconds: 40บ 26' 46'' N, 79บ 58' 56'' W
-* degrees decimal minutes: 40บ 26.767' N, 79บ 58.933' W
-* decimal degrees: 40.446บ N, 79.982บ W
+* degrees minutes seconds: 40ยบ 26' 46'' N, 79ยบ 58' 56'' W
+* degrees decimal minutes: 40ยบ 26.767' N, 79ยบ 58.933' W
+* decimal degrees: 40.446ยบ N, 79.982ยบ W
 * decimal: 40.446, 79.982
 
  Refer to [Geographic coordinate conversion](http://en.wikipedia.org/wiki/Geographic_coordinate_conversion)
@@ -27,7 +27,7 @@ Usage Examples
 ```java
 //Create new coordinates
 Coordinates c1 = new Coordinates(38.7252993, -9.1500364);
-Coordinates c2 = new Coordinates("40บ 26' 46''  N ", " 79บ 58' 56'' W");
+Coordinates c2 = new Coordinates("40ยบ 26' 46''  N ", " 79ยบ 58' 56'' W");
 
 //Print coordinates in [latitude],[longitude] decimal format		
 System.out.println(c1.toString());
@@ -38,6 +38,14 @@ System.out.println(CoordinatesCalculations.isInCircleArea(c1, c1, 100)); //true
 System.out.println(CoordinatesCalculations.isInCircleArea(c2, c2, 100)); //true		
 System.out.println(CoordinatesCalculations.isInCircleArea(c1, c2, 100)); //false
 System.out.println(CoordinatesCalculations.isInCircleArea(c2, c1, 100)); //false
+
+// Output: 
+// 38.7252993,-9.1500364
+// 40.44611111111111,79.98222222222222
+// true
+// true
+// false
+// false
 ```
 
 Issues
