@@ -176,9 +176,9 @@ public class Coordinates {
 		boolean retval = false;
 		raw = raw.toUpperCase();
 
-		if( raw.contains("N") || raw.contains("W") )
+		if( raw.contains("N") || raw.contains("E") )
 			retval = false;
-		else if(raw.contains("S") || raw.contains("E") )
+		else if(raw.contains("S") || raw.contains("W") )
 			retval = true;
 
 		return retval;
